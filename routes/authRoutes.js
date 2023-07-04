@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
+const db = require('../database/db');
 
 const router = express.Router();
 
@@ -11,11 +12,12 @@ router.post('/register', async (req, res)=> {
 
         req.session.user = { username };
 
-        res.redirect('/dashbord');
+        res.redirect('/dashboard');
     } catch (error) {
         res.status(500).send('Error registering user.');
     }
 });
+
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;

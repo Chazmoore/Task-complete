@@ -1,30 +1,32 @@
 const express = require('express');
-const Task = require('../models/Task');
-
 const router = express.Router();
 
-router.post('/task', async (req, res) => {
-    const { title, description } = req.body;
+// Import the Task model
+const Task = require('../models/Task');
 
-    try {
-        await Task.create(title, description);
-
-        res.redirect('/dashboard');
-    } catch (error) {
-        res.status(500).send('Error creating task.');
-    }
+// GET /tasks
+router.get('/tasks', async (req, res) => {
+  try {
+    // Fetch all tasks from the database
+    const tasks = await Task.find();
+    res.json(tasks);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
-router.put('/task/:id', async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        await Task.update(id, true);
-
-        res.sendStatus(200);
-    } catch (error) {
-        res.status(500).send('Error updating task.');
-    }
+// POST /tasks
+router.post('/tasks', async (req, res) => {
+  try {
+    // Create a new task with the data from the request body
+    const task = new Task(req.body);
+    // Save the task to the database
+    const newTask = await task.save();
+    res.status(201).json(newTask);
+  } catch (error) {
+    res.status(400).json({ error: 'Invalid data' });
+  }
 });
 
-module.exports = routers; 
+// Export the router
+module.exports = router;

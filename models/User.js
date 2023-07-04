@@ -1,4 +1,5 @@
-const db = require('../db');
+const db = require('../database/db');
+
 
 const createUserTable = `
 CREATE TABLE IF NOT EXISTS users (
@@ -22,7 +23,8 @@ module.exports = {
         return db.promise().execute(query, [username, hashedPassword]);
     },
     findByUsername: (username) => {
-        const query = 'SELECT * FROM user WHERE username = ?';
+        const query = 'SELECT * FROM users WHERE username = ?';
         return db.promise().execute(query, [username]);
-    },
+      },
+      
 };
