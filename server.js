@@ -9,6 +9,8 @@ const path = require('path');
 const authRoutes = require('./routes/authRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 
+
+
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
@@ -42,6 +44,11 @@ app.engine('handlebars', exphbs.create({
 }).engine);
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
+
+app.use((req, res, next) => {
+  console.log('Static file middleware triggered');
+  next();
+});
 
 app.use(authRoutes);
 app.use(taskRoutes);

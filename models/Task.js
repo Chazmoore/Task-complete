@@ -1,27 +1,27 @@
+const { DataTypes } = require('sequelize')
 const db = require('../database/db');
 
-const createTaskTable = `
-CREATE TABLE IF NOT EXISTS tasks (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  title VARCHAR(255),
-  description VARCHAR(255),
-  completed BOOLEAN DEFAULT false
-)
-`;
+const { DataTypes } = require('sequelize');
+const sequelize = require('../sequelize');
 
-db.query(createTaskTable, (err) => {
-    if (err) {
-        console.error('Error creating task table:'), err
-    }
+const Task = sequelize.define('Task', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  description: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  completed: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
 });
 
-module.exports = {
-    create: (title, decription) => {
-        const query = 'INSERT INTO task (title, description) VALUES (?, ?)';
-        return db.promise().execute(query, [title, decription]);
-    },
-    update: (id, completed) => {
-        const query = 'UPDATE task SET completed = ? WHERE id = ?';
-        return db.promise().execute(query, [completed, id]);
-    },
-};
+module.exports = Task;

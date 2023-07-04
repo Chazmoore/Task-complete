@@ -1,13 +1,49 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <head>
-        <title>My Project</title>
-    </head>
- 
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h1>Welcome to the page</h1>
-    <p>create a Task</p>
+    <div class="form-container">
+        <h1>Login</h1>
+        <p class="error">{{errorMessage}}</p>
+        <form action="/login" method="POST">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="text" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        <hr>
+
+        <h2>Create an account</h2>
+        <form action="/signup" method="POST">
+            <div>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="username">Create Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Create Password:</label>
+                <input type="text" id="password" name="password" required>
+            </div>
+            <button type="submit">Create account</button>
+        </form>
+    </div>
 </body>
 </html>
+
+
+
