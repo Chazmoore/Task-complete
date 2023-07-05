@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>Task Dashboard</h1>
+    </header>
+
+        <div class="container">
+            <div class="column">
+                <h2>Pending Task</h2>
+                <form action="/add-task" method="POST">
+                    <input type="text" name="task" placeholder="Task Title" required>
+                    <button type="submit">Add Task</button>
+                </form>
+                <ul>
+                    {{#each pendingTask}}
+                    <li>
+                        {{this.title}}
+                        <a href="/edit-task/{{this.id}}">Edit</a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="column">
+                <h2>Completed Task</h2>
+                <ul>
+                    {{#each completedTask}}
+                    <li>
+                        {{this.title}}
+                        <a href="/delete-task/{{this.id}}">Delete</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <script src="/script.js"
+    
+</body>
+</html>

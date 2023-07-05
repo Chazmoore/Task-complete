@@ -1,8 +1,6 @@
 const express = require('express');
-const router = express.Router();
-
-// Import the Task model
 const Task = require('../models/Task');
+const router = express.Router();
 
 // GET /tasks
 router.get('/tasks', async (req, res) => {
@@ -30,3 +28,4 @@ router.post('/tasks', async (req, res) => {
 
 // Export the router
 module.exports = router;
+
